@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rashid Otieno Juma - Contact</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Rashid Juma</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1>Get in Touch</h1>
+        <p>I'd love to hear from you</p>
+    </section>
+
+    <section class="contact-container">
+        <div class="contact-info">
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p>rashidjuma198@gmail.com</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-phone"></i>
+                <h3>Phone</h3>
+                <p>+254 793834558</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Location</h3>
+                <p>P.O Box 231-30403, Kenya</p>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2>Send Me a Message</h2>
+            <form action="https://formspree.io/f/xpwppjzp" method="POST" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn primary-btn">Send Message</button>
+            </form>
+            <div id="formStatus"></div>
+        </div>
+    </section>
+
+    <section class="references">
+        <h2>Professional References</h2>
+        <div class="reference-cards">
+            <div class="reference-card">
+                <h3>Mr. Benjamin Wanyama</h3>
+                <p>Senior Lecturer In Software Development</p>
+                <p>Emobilis Technology Training Institute</p>
+                <p><i class="fas fa-phone"></i> +254 714 359 957</p>
+                <p><i class="fas fa-envelope"></i> kingwanyama01@gmail.com</p>
+            </div>
+            <div class="reference-card">
+                <h3>Mr. Anthony Nzuki</h3>
+                <p>2X AWS Certified | AWS Cloud Technology Trainer</p>
+                <p>Emobilis Technology Training Institute</p>
+                <p><i class="fas fa-phone"></i> +254 703 857 404</p>
+                <p><i class="fas fa-envelope"></i> anthony.nzuki@aws.ajiraemobilis.org</p>
+            </div>
+            <div class="reference-card">
+                <h3>Dr. Cyprian Odoli</h3>
+                <p>Station Coordinator, Kenya Marine and Fisheries Research Institute (KMFRI)</p>
+                <p>Baringo Station</p>
+                <p><i class="fas fa-phone"></i> +254 703 825 872</p>
+                <p><i class="fas fa-envelope"></i> cogombe@yahoo.com</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/RashidJuma198" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/rashid-juma-963497194" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>&copy; 2023 Rashid Otieno Juma. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !subject || !message) {
+                showFormStatus('error', 'Please fill in all fields');
+                return;
+            }
+            
+            // Submit form using fetch API
+            fetch('https://formspree.io/f/xpwppjzp', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    subject: subject,
+                    message: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    showFormStatus('success', 'Message sent successfully!');
+                    document.getElementById('contactForm').reset();
+                } else {
+                    throw new Error('Error sending message');
+                }
+            })
+            .catch(error => {
+                showFormStatus('error', 'Error sending message. Please try again later.');
+                console.error('Error sending email:', error);
+            });
+        });
+        
+        function showFormStatus(type, message) {
+            const statusElement = document.getElementById('formStatus');
+            statusElement.classList.remove('success', 'error');
+            statusElement.classList.add(type);
+            statusElement.textContent = message;
+            statusElement.style.display = 'block';
+            
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
