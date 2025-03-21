@@ -76,3 +76,23 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Add to js/script.js
+
+// Intersection Observer for animations on projects page
+const projectCards = document.querySelectorAll('.project-card');
+
+const projectObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1
+});
+
+projectCards.forEach(card => {
+    card.classList.add('hidden');
+    projectObserver.observe(card);
+});
