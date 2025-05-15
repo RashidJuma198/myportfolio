@@ -138,9 +138,70 @@
                     <a href="https://www.credly.com/badges/097fb2f7-c62d-48c0-b7e3-887fc1d60eb8/public_url" target="_blank">View Credential</a>
                 </div>
                 <div class="certification-card">
-                    <img src="images/certificate.png" alt="Virtual Internship Certificate" style="width: 100%; height: auto; object-fit: contain;">
+                    <div class="certificate-container">
+                        <img src="images/certificate.png" alt="Virtual Internship Certificate" class="certificate-img" style="width: 100%; height: auto; object-fit: contain; cursor: pointer;">
+                        <div class="modal" id="certificateModal">
+                            <span class="close">&times;</span>
+                            <img class="modal-content" id="modalImg">
+                        </div>
+                    </div>
                     <h3 style="padding: 0.5rem;">Virtual Internship</h3>
                     <p style="padding: 0 0.5rem;">Jilian Low- Chief Academic Officer</p>
+                    <style>
+                        .certificate-container {
+                            position: relative;
+                        }
+                        .modal {
+                            display: none;
+                            position: fixed;
+                            z-index: 999;
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(0,0,0,0.9);
+                        }
+                        .modal-content {
+                            margin: auto;
+                            display: block;
+                            width: 80%;
+                            max-width: 900px;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+                        .close {
+                            position: absolute;
+                            right: 35px;
+                            top: 15px;
+                            color: #f1f1f1;
+                            font-size: 40px;
+                            font-weight: bold;
+                            cursor: pointer;
+                        }
+                    </style>
+                    <script>
+                        const img = document.querySelector('.certificate-img');
+                        const modal = document.querySelector('.modal');
+                        const modalImg = document.querySelector('.modal-content');
+                        const closeBtn = document.querySelector('.close');
+                        
+                        img.onclick = function() {
+                            modal.style.display = "block";
+                            modalImg.src = this.src;
+                        }
+                        
+                        closeBtn.onclick = function() {
+                            modal.style.display = "none";
+                        }
+                        
+                        window.onclick = function(event) {
+                            if (event.target == modal) {
+                                modal.style.display = "none";
+                            }
+                        }
+                    </script>
                     
                 </div>
             </div>
