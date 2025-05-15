@@ -183,27 +183,7 @@
                             cursor: pointer;
                         }
                     </style>
-                    <script>
-                        const img = document.querySelector('.certificate-img');
-                        const modal = document.querySelector('.modal');
-                        const modalImg = document.querySelector('.modal-content');
-                        const closeBtn = document.querySelector('.close');
-                        
-                        img.onclick = function() {
-                            modal.style.display = "block";
-                            modalImg.src = this.src;
-                        }
-                        
-                        closeBtn.onclick = function() {
-                            modal.style.display = "none";
-                        }
-                        
-                        window.onclick = function(event) {
-                            if (event.target == modal) {
-                                modal.style.display = "none";
-                            }
-                        }
-                    </script>
+                   
                     
                 </div>
             </div>
